@@ -1,4 +1,4 @@
-# HyperButterfly: PyTorch를 위한 효율적인 하이퍼볼릭 기하학 라이브러리
+# riemutils: PyTorch를 위한 효율적인 하이퍼볼릭 기하학 라이브러리
 
 [![PyTorch](https://img.shields.io/badge/PyTorch-1.7+-ee4c2c.svg)](https://pytorch.org/)
 [![Python](https://img.shields.io/badge/python-3.7%20%7C%203.8%20%7C%203.9%20%7C%203.10-blue)](https://www.python.org/)
@@ -6,7 +6,7 @@
 
 ## 🌟 개요
 
-**HyperButterfly**는 하이퍼볼릭 공간에서의 기하학적 딥러닝을 위한 고성능 PyTorch 확장 라이브러리입니다. 리만 다양체, 특히 하이퍼볼릭 공간에서의 효율적인 연산과 Butterfly 팩터를 통한 효율적인 변환 구현을 제공합니다.
+**riemutils**는 하이퍼볼릭 공간에서의 기하학적 딥러닝을 위한 고성능 PyTorch 확장 라이브러리입니다. 리만 다양체, 특히 하이퍼볼릭 공간에서의 효율적인 연산과 Butterfly 팩터를 통한 효율적인 변환 구현을 제공합니다.
 
 ## ✨ 주요 기능
 

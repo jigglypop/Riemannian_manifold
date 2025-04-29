@@ -1,7 +1,6 @@
 import torch
 from torch.autograd import Function
 
-# C++/CUDA bindings
 from ._C import (
     matmul,
     log_map_origin_cpu,
@@ -20,20 +19,16 @@ if torch.cuda.is_available():
     except ImportError:
         _has_cuda = False
 
-# Pure-PyTorch fallback
 from .hyper_butterfly_py import hyper_butterfly_py
 
-# Autograd-aware wrapper
 class HyperButterflyFunction(Function):
     @staticmethod
     def forward(ctx, x, params, c, L):
         ctx.save_for_backward(x, params)
         ctx.c, ctx.L = c, L
-        # Try C++ extension if available
         if x.is_cuda and _has_cuda:
             y, u, v = hyper_butterfly_cuda(x, params, torch.empty(0, device=x.device), c, L)
         else:
-            # CPU extension or fallback
             if not x.is_cuda and 'hyper_butterfly_cpu' in globals():
                 y, u, v = hyper_butterfly_cpu(x, params, torch.empty(0), c, L)
             else:
@@ -44,8 +39,6 @@ class HyperButterflyFunction(Function):
     def backward(ctx, grad_out):
         x, params = ctx.saved_tensors
         c, L = ctx.c, ctx.L
-        # If C++ extension provides backward (it doesn't), else use autograd via PyTorch
-        # So call Python fn under autograd tracking off
         with torch.enable_grad():
             x_req = x.detach().requires_grad_()
             p_req = params.detach().requires_grad_()
